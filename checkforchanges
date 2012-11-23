@@ -8,11 +8,16 @@ curl ${PDF} --silent -o ${OUTFILE}
 
 HASH=`md5 -q ${OUTFILE}`
 
-if [ `cat ${MD5FILE}` == ${HASH} ] 
+if [ ! -e ${MD5FILE} ]
 then
-  echo "Nothing changed"
+  echo "First run - I have no fucking way of knowing if anything changed"
 else
-  echo "Some shit changed"
+  if [ `cat ${MD5FILE}` == ${HASH} ] 
+  then
+    echo "Nothing changed"
+  else
+    echo "Some shit changed"
+  fi
 fi
 
 echo ${HASH} > ${MD5FILE}
