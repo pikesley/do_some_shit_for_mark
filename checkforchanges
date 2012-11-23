@@ -21,3 +21,4 @@ else
 fi
 
 echo ${HASH} > ${MD5FILE}
+rm ${OUTFILE}
