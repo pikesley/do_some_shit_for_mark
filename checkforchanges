@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PDF=http://www.nctj.com/assets/library/document/l/original/latest_shorthand_results2.pdf
+OUTFILE=someshittypdfthing.pdf
+MD5FILE=hash.md5
+
+curl ${PDF} --silent -o ${OUTFILE}
+
+HASH=`md5 -q ${OUTFILE}`
+
+if [ `cat ${MD5FILE}` == ${HASH} ] 
+then
+  echo "Nothing changed"
+else
+  echo "Some shit changed"
+fi
+
+echo ${HASH} > ${MD5FILE}
